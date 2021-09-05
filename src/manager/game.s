@@ -19,8 +19,8 @@
 ;;manager member variables
 ;;======================================================
 ent1:: DefineCmp_Entity	10, 10,		1,		2,		4,	8,	_G_via
-ent2:: DefineCmp_Entity	70,	40,		0xff,	0xff,	4,	8,	_G_hero_down
-ent3:: DefineCmp_Entity 40,	120,	2,		0xfc,	4,	8,	_sp_player
+ent2:: DefineCmp_Entity	70,	40,		-1,	 	1,	4,	8,	_G_hero_down
+ent3:: DefineCmp_Entity 40,	120,	1,		-1,	4,	8,	_sp_player
 ;;======================================================
 ;;manager public functions
 ;;======================================================
