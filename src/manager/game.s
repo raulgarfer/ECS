@@ -7,6 +7,8 @@
 .globl _G_via
 .globl _G_hero_down
 .globl _sp_player
+.globl _G_careto_iz_1
+.globl _G_enemigo_left
 
 .include "cpctelera.h.s"
 .include "cmp/entity.h.s"
@@ -18,9 +20,9 @@
 ;;======================================================
 ;;manager member variables
 ;;======================================================
-ent1:: DefineCmp_Entity	10, 10,		1,		2,		4,	8,	_G_via
-ent2:: DefineCmp_Entity	70,	40,		-1,	 	1,	4,	8,	_G_hero_down
-ent3:: DefineCmp_Entity 40,	120,	1,		-1,	4,	8,	_sp_player
+ent1:: DefineCmp_Entity	10, 10,		1,		2,		4,	8,	_sp_player
+ent2:: DefineCmp_Entity	70,	40,		-1,	 	1,		6,	12,	_G_careto_iz_1
+ent3:: DefineCmp_Entity 40,	120,	1,		-1,		6,	12,	_G_enemigo_left
 ;;======================================================
 ;;manager public functions
 ;;======================================================
