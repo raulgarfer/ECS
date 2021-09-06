@@ -4,22 +4,35 @@
 .include "manager/entity.h.s"
 .include "cpc_funciones.h.s"
 
+.globl _hero_left
+.globl _hero_right
+.globl _hero_down
+.globl _hero_up
 sys_input_init::
+	;ld (puntero_array),ix
 ret
+;;======================================================
+;;comprueba las teclas que se usan en el juego
+;;======================================================
 sys_input_update::
+	puntero_array = . + 2
+	;ld ix,#0000
 
-ld e_vx(ix),#0
+;;pone a 0 las velocidades del personaje
+ld e_vx(ix),#0	
 ld e_vy(ix),#0
 
 call  cpct_scanKeyboard_asm
 
-
 ld hl,#Key_P
-	call cpct_isKeyPressed_asm
+	call cpct_isKeyPressed_asm		;;comprueba si la tecla P esta pulsadda
 	jr z,p_not_pressed
 
 	p_pressed:
-		ld e_vx(ix),#1
+		ld e_vx(ix),#1				;;si esta pulsada, cambia la velocidad en consonancia
+	ld de,#_hero_right
+		ld e_pspr_l(ix),e
+		ld e_pspr_h(ix),d 	
 	p_not_pressed:
 ld hl,#Key_O
 	call cpct_isKeyPressed_asm
@@ -27,6 +40,10 @@ ld hl,#Key_O
 
 	O_pressed:
 		ld e_vx(ix),#-1
+		ld de,#_hero_left
+		ld e_pspr_l(ix),e
+		ld e_pspr_h(ix),d 
+
 	O_not_pressed:
 
 ld hl,#Key_Q
@@ -35,6 +52,9 @@ ld hl,#Key_Q
 
 	q_pressed:
 		ld e_vy(ix),#-2
+		ld de,#_hero_up
+		ld e_pspr_l(ix),e
+		ld e_pspr_h(ix),d 
 	q_not_pressed:	
 ld hl,#Key_A
 	call cpct_isKeyPressed_asm
@@ -42,5 +62,8 @@ ld hl,#Key_A
 
 	a_pressed:
 		ld e_vy(ix),#2
+		ld de,#_hero_down
+		ld e_pspr_l(ix),e
+		ld e_pspr_h(ix),d 
 	a_not_pressed:
 ret

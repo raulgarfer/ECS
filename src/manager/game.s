@@ -1,15 +1,5 @@
 .module man_game_s
 
-.globl man_entity_init
-.globl sys_physics_update
-.globl sys_eren_update
-
-.globl _G_via
-.globl _G_hero_down
-.globl _sp_player
-.globl _G_careto_iz_1
-.globl _G_enemigo_left
-
 .include "cpctelera.h.s"
 .include "cmp/entity.h.s"
 .include "sys/physics.h.s"
@@ -17,12 +7,17 @@
 .include "sys/input.h.s"
 .include "manager/entity.h.s"
 .include "assets/assets.h.s"
+.include "manager/game.h.s"
+.include "sys/ia.h.s"
+
+
 ;;======================================================
 ;;manager member variables
+;; 			macro		x	y	velx	vely	ancho	alto	sprite			status
 ;;======================================================
-ent1:: DefineCmp_Entity	10, 10,		1,		2,		4,	8,	_sp_player
-ent2:: DefineCmp_Entity	70,	40,		-1,	 	1,		6,	12,	_G_careto_iz_1
-ent3:: DefineCmp_Entity 40,	120,	1,		-1,		6,	12,	_G_enemigo_left
+ent1:: DefineCmp_Entity	10, 10,		1,		2,		4,	8,	_hero_down, 		st_no_ia
+ent2:: DefineCmp_Entity	70,	40,		-1,	 	1,		6,	12,	_G_careto_iz_1,		st_standby
+ent3:: DefineCmp_Entity 40,	120,	1,		-1,		6,	12,	_G_enemigo_left,	st_standby
 ;;======================================================
 ;;manager public functions
 ;;======================================================
@@ -34,6 +29,8 @@ call man_entity_init
 call sys_eren_init
 call sys_physics_init
 call sys_input_init
+call man_entity_getArray
+call sys_ia_init
 	;;inicia 3 entiddes
 ld hl,#ent1
 	call man_entity_create
@@ -48,6 +45,10 @@ ret
 man_game_update::
 	call man_entity_getArray
 	call sys_input_update
+
+	call man_entity_getArray
+	call sys_ia_update
+
 	call man_entity_getArray
 	call sys_physics_update
 ret

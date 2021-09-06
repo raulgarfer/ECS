@@ -8,9 +8,13 @@ screen_width 	= 80
 screen_heigth 	= 200
 
 sys_physics_init::
+;	ld (puntero_array),ix
 ret
 
 sys_physics_update::
+	puntero_array = . + 2
+	;ld ix,#0000
+
 	ld b,a 			 			;;carga en b el numero de entidades,para control y resta posterior
 	update_loop:
 		ld a,#screen_width + 1
