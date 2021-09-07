@@ -17,7 +17,7 @@
 ;;======================================================
 ent1:: DefineCmp_Entity	10, 10,		1,		2,		4,	8,	_hero_down, 		st_no_ia
 ent2:: DefineCmp_Entity	70,	40,		-1,	 	1,		6,	12,	_G_careto_iz_1,		st_standby
-ent3:: DefineCmp_Entity 40,	120,	1,		-1,		6,	12,	_G_enemigo_left,	st_standby
+ent3:: DefineCmp_Entity 40,	120,	1,		-1,		6,	12,	_G_enemigo_left,	st_no_ia
 ;;======================================================
 ;;manager public functions
 ;;======================================================
