@@ -11,12 +11,6 @@ screen_start= 0xc000
 ;;==============================================================================
 sys_eren_init::
 	ld (_entity_counter),a 
-	
-	ld c,#0
-	call cpct_setVideoMode_asm
-	cpctm_setBorder_asm #HW_WHITE
-
-	
 ret
 ;;==============================================================================
 ;;llama a pintar las entidades
@@ -34,7 +28,7 @@ sys_eren_render_entities::
 	update_loop:
 		    ;;comprueba si la entidad es no valida, vuelve si es asi
         ld a,e_w(ix)
-        cp #ent_invalid
+        cp #e_w_invaild_entity
         ret z   
 	
 		ld e,e_lastvp_l(ix)

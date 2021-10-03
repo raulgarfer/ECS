@@ -7,7 +7,10 @@
 .include "cmp/entity.h.s"
 .include "assets/assets.h.s"
 .include "cpctelera.h.s"
-
+ .globl man_entity_AI_add
+ .globl  man_entity_IA_init
+ .globl man_entity_collision_init
+ .globl man_entity_collision_add
 ;;======================================================
 ;;manager mermber variables
 ;;======================================================
@@ -31,16 +34,19 @@ ret
 ;;======================================================
 man_entity_init::
 ;;reset a todos los valores de vector8array) de components
+	call man_entity_IA_init
+	call man_entity_collision_init
+
 	xor a 				;;a=0
 	ld (entity_num),a 	;;pone a 0 el numero de entidades
 	ld hl,#entity_array;;pone en entity_pend el puntero a la primera entidad libre
 	ld (entity_pend),hl
 
-	ex de,hl			;;salva hl en de
-	ld hl,#e_w			;;carga en hl la posiocn ancho de entidad
-	add hl,de			;;puntero situado en el valor entidad como ancho (hl=hl+de)
-	ld (hl),#ent_invalid	;;declara la entidad no valida, la primera entidad del array
-	ex de,hl			;;en hl esta el puntero al array de entidades
+	ex de,hl					;;salva hl en de
+	ld hl,#e_w					;;carga en hl la posiocn ancho de entidad
+	add hl,de					;;puntero situado en el valor entidad como ancho (hl=hl+de)
+	ld (hl),#e_w_invaild_entity	;;declara la entidad no valida, la primera entidad del array
+	ex de,hl					;;en hl esta el puntero al array de entidades
 ret
 ;;======================================================
 ;;añadir una nueva entidad al array,sin inciarla
@@ -80,4 +86,12 @@ man_entity_create::
 	;;copy values
 	pop hl
 	ldir
+
+	ld a,e_cmp_type(ix)
+	and #e_cmp_IA
+	call nz,man_entity_AI_add
+
+	ld a,e_cmp_type(ix)
+	and #e_cmp_physics
+	call nz,man_entity_collision_add
 ret

@@ -5,6 +5,7 @@
 .include "cpc_funciones.h.s"
 .include "input.h.s"
 
+.globl _main
 sys_input_init::
 	call man_entity_getArray
 	ld (input_puntero_array),ix
@@ -65,11 +66,11 @@ ld hl,#Key_A
 		ld e_pspr_h(ix),d 
 	a_not_pressed:
 		ld x_objetivo(ix),#0
-	ld hl,#Key_Space
+	ld hl,#Key_Esc
 	call cpct_isKeyPressed_asm
 	jr z,space_not_pressed
-		ld x_objetivo(ix),#1
-	
+		;ld x_objetivo(ix),#1
+		jp _main
 	space_not_pressed:
 
 ret

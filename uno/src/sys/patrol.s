@@ -13,7 +13,7 @@ ia_patrol::
   ld l,patrol_step_l(ix)      ;;carga la posicion a mover en entidad
   ld h,patrol_step_h(ix)
   ld a,(hl)                   ;;a=x .   comprobacion de que no ha terminado
-  cp #x_invalida              ;;es invalida?
+  cp #e_w_invaild_entity              ;;es invalida?
     jr z,reset_patrol         ;;pon a 0 el turno de patrulla
  ld x_objetivo(ix),a          ;;carga en a el valor del turnode patrulla
  inc hl                       ;;mueve una posicion adelante
@@ -26,8 +26,8 @@ ia_patrol::
  inc hl
  ld patrol_step_h(ix),h
  ;;cambiar de estado de entidad
- ld prev_status(ix),#st_patrol
- ld e_status(ix),#st_move_to
+ ld prev_status(ix),#st_IA_patrol
+ ld e_status(ix),#st_IA_move_to
 ret
 reset_patrol:
   ;;coje los 2 sigioentes bytes que apuntan a hl, haciendo que apunten

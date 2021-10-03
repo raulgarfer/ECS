@@ -46,7 +46,8 @@ $(eval $(call IMG2SP, CONVERT         , src/assets/hero_left.png , 8, 8, hero_le
 $(eval $(call IMG2SP, CONVERT         , src/assets/hero_right.png , 8, 8, hero_right ))
 $(eval $(call IMG2SP, CONVERT         , src/assets/hero_up.png , 8, 8, hero_up ))
 $(eval $(call IMG2SP, CONVERT         , src/assets/joya.png , 8, 8, sp_joya ))
-
+$(eval $(call IMG2SP, CONVERT         , src/assets/ladrillo.png , 8, 8, sp_ladrillo ))
+$(eval $(call IMG2SP, CONVERT         , src/assets/via.png , 8, 8, sp_via ))
 ##
 ## OLD MACROS (For compatibility)
 ##

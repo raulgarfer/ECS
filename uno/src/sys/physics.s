@@ -17,7 +17,9 @@ sys_physics_init::
 ret
 ;;==============================================================================
 ;;actualiza fisica
-;;input 
+;;input ix puntero al array de entidades
+;;a como cantidad de entidades a tratar
+;; destruye af,bc,de,ih
 ;;==============================================================================
 sys_physics_update::
 	phys_puntero_array == . + 2	;;puntero automodificable
