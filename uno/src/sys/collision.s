@@ -20,33 +20,36 @@ sys_collision_update::
     ent_array_ptr = . + 1
     ld hl,#0x0000
     loop:
-        ;;get pointer to next_IA_entity in de
-        ld e,(hl)           ;;
-        inc hl              ;;de=&IA_entity 
-        ld d,(hl)
+    ;;get pointer to next_IA_entity in de
+    ld e,(hl)           ;;
+    inc hl              ;;de=&IA_entity 
+    ld d,(hl)
+	  inc hl              ;;hl+=2
+    ;;if (ent_ptr=null_ptr)exit
+    ld a,d
+    or e
+    ret z
+    push hl             ;;guarda el puntero de ix para uso posterior
+    ;;ix=de(ix=&IA_entity)
+    ld__ixl_e
+    ld__ixh_d
+  incrementa_iy:
+      ld e,(hl)           ;;
+      inc hl              ;;de=&IA_entity 
+      ld d,(hl)
 	    inc hl              ;;hl+=2
-        ;;ix=de(ix=&IA_entity)
-        ld__ixl_e
-        ld__ixh_d
-
-        ld e,(hl)           ;;
-        inc hl              ;;de=&IA_entity 
-        ld d,(hl)
-	    inc hl              ;;hl+=2
+      ld a,d
+      or e
+      jr z,siguiente_ix
         ;;ix=de(ix=&IA_entity)
         ld__iyl_e
         ld__iyh_d
         call sys_check_collision
-          
-        ld e,(hl)           ;;
-        inc hl              ;;de=&IA_entity 
-        ld d,(hl)
-	    inc hl              ;;hl+=2
-        ;;ix=de(ix=&IA_entity)
-        ld__iyl_e
-        ld__iyh_d
-        call sys_check_collision
+      jr incrementa_iy
 ret
+siguiente_ix:
+  pop hl
+  jr loop
 ;;ix entidad 1
 ;;iy entidad 2
 sys_check_collision::
@@ -81,10 +84,10 @@ sys_check_collision::
   add e_w(iy)
   sub e_y(ix)
   jr c,no_collision
-        call choque
-    colision::
-    ld a,#0xff                ;;pinta un byte de chivato arriba izquierda
-    ld (0xc000),a
+  
+  colision::
+    call choque
+     
     ret
 no_collision::
     ld a,#0

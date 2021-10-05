@@ -15,7 +15,7 @@
 ;;manager member variables
 ;; 			macro			  x y velx vely	ancho alto sprite pvptr objx objy status
 ;;======================================================
-player::	DefineCmp_Entity	10, 150,0,	0,	4,	8,	e_cmp_default, 	_hero_down,			st_no_IA
+player::	DefineCmp_Entity	10, 150,0,	0,	4,	8,	e_cmp_physics, 	_hero_down,			st_no_IA
 enemy1::	DefineCmp_Entity	70,	40,	0,	0,	6,	12,	e_cmp_default,	_G_careto_iz_1,		st_stand_by
 enemy2::	DefineCmp_Entity 	8,	8,	0,	0,	6,	12,	e_cmp_default,	_G_enemigo_left,	st_stand_by
 joya::		DefineCmp_Entity 	12,	24	,0,	0,	4,	8,	e_cmp_physics ,	_sp_joya,			st_no_IA
@@ -50,6 +50,7 @@ ret
 ;;actuaqliza 1 ciclo de juego haciendo todo ,menos el render
 ;;======================================================
 man_game_update::
+	cpctm_setBorder_asm #HW_WHITE
 	;call man_entity_getArray
 	call sys_input_update
 

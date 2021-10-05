@@ -25,9 +25,6 @@ man_patrol_init::
             ld de,#sizeof_e
             add ix,de
             jr loop
-
-
-
 ret 
 ;;===================================================
 ;;se devuelve el puntero a patrulla oportuna
@@ -57,20 +54,3 @@ defpoint 30,0
 defpoint 30,24
 defpoint 8,24
 endpatrol patrulla_1
-
-;  patrulla_0:: 
-;       .db 40,20
-;       .db 60,70
-;       .db 40,100
-;       .db 2,70
-;    .db e_w_invaild_entity
-;       .dw patrulla_0
-;   ;; hace un cuadrado de esquina a esquina
-;   patrulla_1::     
-;       .db 8,0
-;       .db 30,0
-;       .db 30,24
-;       .db 8,24
-;  .db e_w_invaild_entity
-;       .dw patrulla_1
- 

@@ -3,7 +3,7 @@
 .include "cpc_funciones.h.s"
     espacio:  .asciz "Pulsa Espacio.   Controles QAOP/OPQA Escape"
     controles:.asciz "25-9.Prueba de movimiento y patrulla.Se pone un tesoro a recoger (joya) y salida(puerta)."
-    linea1:.asciz "3-10 Deteccion de player VS entidad 1."
+    linea1:.asciz "3-10 Deteccion de player VS entidad 1.Deteccion de entidades entre si. cambia el border."
     linea2:.asciz "Primera publicacion 29-9-2021"
 sys_menu::
     ld c,#2
